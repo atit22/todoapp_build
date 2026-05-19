@@ -1,14 +1,38 @@
-name: 'sample'
+name: 'terrform PR'
 on: 
- push:
+ pull_request:
    branches:
      - main
 
 jobs:
  terraforminit:
   name: terraform init
-  runs-on: 
+  runs-on: ubuntu-latest
   steps:
+    - name: Checkout
+      uses: actions/checkout@v6.0.2
+    - name: HashiCorp - Setup Terraform
+      uses: hashicorp/setup-terraform@v2.0.3
+    - name: Login to Azure
+  # You may pin to the exact commit or the version.
+  # uses: hyperskill/azure-login@478606e89da676578cae29266e6ceb9ce8157182
+      uses: hyperskill/azure-login@v3.0.0
+       with:
+    # Azure client id
+     client_id: 
+    # Azure client secret
+    client_secret: 
+    # Azure subscription id
+    subscription_id: 
+    # Azure tenant id
+    tenant_id: 
+    - name: Terraform Init
+      run: terraform init 
+    - name: terraform fmt
+      run: terraform fmt
+    - name: terraform plan
+      run: terraform plan
+      
     - name: init
       run: echo hello world
       

@@ -1,0 +1,17 @@
+name: 'sample'
+on: 
+ push:
+   branches:
+     - main
+
+jobs:
+ terraforminit:
+  name: terraform init
+  runs-on: 
+  steps:
+    - name: init
+      run: echo hello world
+      
+
+
+
